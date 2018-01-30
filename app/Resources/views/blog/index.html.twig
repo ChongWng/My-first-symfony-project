@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Blogs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Content</th>
+                <th>Createtime</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for blog in blogs %}
+            <tr>
+                <td><a href="{{ path('blog_show', { 'id': blog.id }) }}">{{ blog.title }}</a></td>
+                <td>{{ blog.author }}</td>
+                <td>{{ blog.content }}</td>
+                <td>{% if blog.createtime %}{{ blog.createtime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ blog.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('blog_show', { 'id': blog.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('blog_edit', { 'id': blog.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('blog_new') }}">Create a new blog</a>
+        </li>
+    </ul>
+{% endblock %}
